@@ -1,4 +1,4 @@
-package com.example.ecommerecapp.ui.theme
+package com.example.ecommerecapp.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
