@@ -2,6 +2,7 @@ package com.example.ecommerecapp.presentation.components
 
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,8 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices.PIXEL_9
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -32,7 +32,7 @@ fun OutlinedTxtField(
     text: String,
     hasError: Boolean = false,
     label: String = "Label",
-    prefixIcon: ImageVector,
+    prefixIcon: ImageVector? = null,
     errorText: String? = null,
     onChange: (String) -> Unit
 ) {
@@ -44,7 +44,7 @@ fun OutlinedTxtField(
             onValueChange = onChange,
             minLines = 1,
             textStyle = TextStyle.Default.copy(
-                fontSize = 12.sp
+                fontSize = 16.sp
             ),
             decorationBox = { innerTextField ->
                 Row(
@@ -57,21 +57,29 @@ fun OutlinedTxtField(
                         .padding(horizontal = 8.dp, vertical = 12.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(
-                        prefixIcon,
-                        contentDescription = null,
-                        tint = Color.Gray.copy(alpha = 0.5f),
-                        modifier = Modifier.padding(horizontal = 10.dp)
-                    )
-                    Spacer(modifier = Modifier.width(5.dp))
-                    if (text.isEmpty()) {
-                        Text(
-                            label,
-                            color = if (hasError) errorColor else Color.Gray,
-                            fontSize = 14.sp
+                    if (prefixIcon != null) {
+                        Icon(
+                            prefixIcon,
+                            contentDescription = null,
+                            tint = Color.Gray,
+                            modifier = Modifier.padding(horizontal = 10.dp)
                         )
                     }
-                    innerTextField()
+                    Spacer(modifier = Modifier.width(5.dp))
+
+                    Box(
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        if (text.isEmpty()) {
+                            Text(
+                                label,
+                                color = if (hasError) errorColor else Color.Gray.copy(alpha = 0.6f),
+                                fontSize = 16.sp
+                            )
+                        }
+                        innerTextField()
+                    }
+
                 }
             })
         if (hasError && errorText != null) {
@@ -97,7 +105,7 @@ fun TextFieldPreview() {
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        OutlinedTxtField(text = "", prefixIcon = Icons.Outlined.Person) {}
+        OutlinedTxtField(text = "") {}
     }
 
 }

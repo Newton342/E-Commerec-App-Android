@@ -70,7 +70,7 @@ dependencies {
     //Navigation
     implementation(libs.hilt.navigation)
     //Retrofit
-    implementation(libs.retrofit)
+    implementation(libs.bundles.retrofit)
     //Coil
     implementation(libs.coil)
     //Lifecycle compose

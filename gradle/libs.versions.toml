@@ -24,6 +24,7 @@ ksp-devtools-version = "2.2.10-2.0.2"
 lifecycle-version = "2.10.0"
 #Kotlin serialization plugin
 serialization-plugin-version = "2.2.21"
+serialization-converter-version = "1.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -49,6 +50,7 @@ hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", v
 #Retrofit
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit-version" }
 #KTX Serialization
+serialization-converter = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "serialization-converter-version" }
 kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "ktx-serialization-version" }
 #Coil
 coil = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil-version" }
@@ -67,4 +69,7 @@ ksp-devtools = { id = "com.google.devtools.ksp", version.ref = "ksp-devtools-ver
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serialization-plugin-version" }
 #Hilt plugin
 hilt-plugin = { id = "com.google.dagger.hilt.android", version.ref = "hilt-version" }
+
+[bundles]
+retrofit = ["retrofit","serialization-converter"]
 
