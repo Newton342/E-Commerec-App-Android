@@ -14,11 +14,11 @@ fun AppNavController() {
         navController = navController, startDestination = Screen.LoginScreen.route
     ) {
         composable(route = Screen.LoginScreen.route) {
-            LoginScreen()
+            LoginScreen(navController = navController)
         }
 
         composable(route = Screen.UserListScreen.route) {
-            GetUserScreen()
+            GetUserScreen(navController = navController)
         }
     }
 }

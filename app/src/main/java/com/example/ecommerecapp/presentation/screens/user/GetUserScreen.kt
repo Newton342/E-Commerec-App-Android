@@ -15,6 +15,8 @@ import androidx.compose.ui.tooling.preview.Devices.PIXEL_9
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.ecommerecapp.domain.model.User
 import com.example.ecommerecapp.network.NetworkUIState
 import com.example.ecommerecapp.presentation.components.CircularProgressBar
@@ -22,13 +24,17 @@ import com.example.ecommerecapp.presentation.components.CustomAppBar
 import com.example.ecommerecapp.presentation.screens.user.component.UserListTile
 
 @Composable
-fun GetUserScreen(modifier: Modifier = Modifier, userVm: UsersVm = hiltViewModel()) {
+fun GetUserScreen(
+    modifier: Modifier = Modifier,
+    userVm: UsersVm = hiltViewModel(),
+    navController: NavController
+) {
 
     val state = userVm.userData.collectAsStateWithLifecycle().value
     Scaffold(
         modifier.fillMaxSize(), topBar = {
             CustomAppBar(title = "Users") {
-
+                navController.popBackStack()
             }
         }) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
@@ -59,5 +65,6 @@ fun GetUserScreen(modifier: Modifier = Modifier, userVm: UsersVm = hiltViewModel
 @Preview(uiMode = UI_MODE_NIGHT_YES, showBackground = true, device = PIXEL_9)
 @Composable
 fun GetUserScreenPreview() {
-    GetUserScreen()
+    val navController = rememberNavController()
+    GetUserScreen(navController = navController)
 }

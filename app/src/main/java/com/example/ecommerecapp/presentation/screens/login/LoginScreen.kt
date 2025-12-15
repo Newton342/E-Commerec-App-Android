@@ -15,25 +15,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Devices.PIXEL_9
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.ecommerecapp.presentation.navigation.Screen
 import com.example.ecommerecapp.presentation.screens.login.components.LoginBody
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(modifier: Modifier = Modifier) {
+fun LoginScreen(modifier: Modifier = Modifier, navController: NavController) {
     Scaffold(
-        modifier.fillMaxSize(),
-        topBar = {
-            TopAppBar(
-                title = {}, actions = {
-                    TextButton(
-                        onClick = {}) {
-                        Text("Get Users")
-                    }
+        modifier.fillMaxSize(), topBar = {
+            TopAppBar(title = {}, actions = {
+                TextButton(
+                    onClick = {
+                        navController.navigate(Screen.UserListScreen.route)
+                    }) {
+                    Text("Get Users")
                 }
-            )
-        }
-    ) { paddingValues ->
+            })
+        }) { paddingValues ->
         Box(
             modifier = Modifier
                 .padding(paddingValues)
@@ -42,7 +43,6 @@ fun LoginScreen(modifier: Modifier = Modifier) {
         ) {
             LoginBody()
         }
-
 
 
     }
@@ -57,11 +57,13 @@ fun LoginScreen(modifier: Modifier = Modifier) {
 )
 @Composable
 fun LoginScreenPreviewDark() {
-    LoginScreen()
+    val navController = rememberNavController()
+    LoginScreen(navController = navController)
 }
 
 @Preview(showBackground = true, device = PIXEL_9, name = "Login Screen")
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen()
+    val navController = rememberNavController()
+    LoginScreen(navController = navController)
 }
