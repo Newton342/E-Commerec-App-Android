@@ -24,9 +24,7 @@ import com.example.ecommerecapp.presentation.screens.user.component.UserListTile
 
 @Composable
 fun GetUserScreen(
-    modifier: Modifier = Modifier,
-    userVm: UsersVm = hiltViewModel(),
-    navController: NavController
+    modifier: Modifier = Modifier, userVm: UsersVm = hiltViewModel(), navController: NavController
 ) {
 
     val state = userVm.userData.collectAsStateWithLifecycle().value
@@ -50,7 +48,15 @@ fun GetUserScreen(
                 is NetworkUIState.Success -> {
                     LazyColumn(modifier = Modifier.fillMaxSize()) {
                         items(items = state.data) { user ->
-                            UserListTile(user)
+                            UserListTile(user) {
+                                navController.previousBackStackEntry?.savedStateHandle?.set(
+                                    "username", user.username
+                                )
+                                navController.previousBackStackEntry?.savedStateHandle?.set(
+                                    "password", user.password
+                                )
+                                navController.popBackStack()
+                            }
                         }
                     }
                 }

@@ -12,6 +12,8 @@ class LoginUseCase @Inject constructor(
         userLogin.loginUser(loginModel).let {
             if (it.isSuccessful){
                 emit(it.body())
+            }else{
+                emit(null)
             }
         }
     }

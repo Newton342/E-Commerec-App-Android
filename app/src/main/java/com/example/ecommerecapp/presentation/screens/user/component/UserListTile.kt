@@ -19,11 +19,11 @@ import androidx.compose.ui.unit.sp
 import com.example.ecommerecapp.domain.model.User
 
 @Composable
-fun UserListTile(user: User) {
+fun UserListTile(user: User, onTap : ()-> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable(onClick = {})
+            .clickable(onClick = onTap)
     ) {
         Column(
             modifier = Modifier
@@ -57,5 +57,5 @@ private fun UserListTilePreview() {
             username = null,
             v = null
         )
-    )
+    ){}
 }

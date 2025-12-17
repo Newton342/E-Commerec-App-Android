@@ -3,7 +3,6 @@ package com.example.ecommerecapp.presentation.screens.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ecommerecapp.domain.model.LoginModel
-import com.example.ecommerecapp.domain.model.TokenModel
 import com.example.ecommerecapp.domain.usecases.LoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -28,10 +27,9 @@ class LoginVm @Inject constructor(
     val uiEvent: SharedFlow<LoginUiEvent> = _uiEvent
 
     private fun login(loginData: LoginModel) {
-
+        _uiState.update { it.copy(isLoading = true) }
         loginUseCase(loginData).onEach { token ->
-            _uiState.update { it.copy(isLoading = true) }
-            if (token is TokenModel) {
+            if (token?.token != null) {
                 _uiEvent.emit(LoginUiEvent.NavigateToHomeScreen)
             } else {
                 _uiEvent.emit(LoginUiEvent.ShowSnackBar("Invalid credentials"))
