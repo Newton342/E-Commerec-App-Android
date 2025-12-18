@@ -4,12 +4,9 @@ import com.example.ecommerecapp.domain.repositories.IProductRepo
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class GetAllProductUseCase @Inject constructor(
-    private val product: IProductRepo
-) {
-
-    operator fun invoke(sort:String?= null) = flow {
-        product.getAllProducts(sort).let {
+class GetProductByCategoryUseCase @Inject constructor(private val productRepo: IProductRepo) {
+    operator fun invoke(category: String) = flow {
+        productRepo.getProductByCategory(category).let {
             if (it.isSuccessful) {
                 emit(it.body())
             }

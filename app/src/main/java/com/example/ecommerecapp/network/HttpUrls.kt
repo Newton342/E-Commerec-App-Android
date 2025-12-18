@@ -12,3 +12,5 @@ const val PRODUCT = "product/{id}"
 
 const val CATEGORIES = "products/categories"
 
+const val PRODUCTS_BY_CATEGORY = "products/category/{category}"
+
