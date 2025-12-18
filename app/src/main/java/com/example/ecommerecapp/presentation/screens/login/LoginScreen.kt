@@ -63,7 +63,14 @@ fun LoginScreen(
     LaunchedEffect(Unit) {
         loginVm.uiEvent.collect { uiEvent ->
             when (uiEvent) {
-                LoginUiEvent.NavigateToHomeScreen -> {}
+                LoginUiEvent.NavigateToHomeScreen -> {
+                    navController.navigate(Screen.HomeScreen.route) {
+                        popUpTo(Screen.LoginScreen.route) {
+                            inclusive = true
+                        }
+                    }
+                }
+
                 is LoginUiEvent.ShowSnackBar -> {
                     snackBarHostState.showSnackbar(uiEvent.message)
                 }

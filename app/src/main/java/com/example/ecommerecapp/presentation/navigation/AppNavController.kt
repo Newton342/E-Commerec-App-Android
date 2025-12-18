@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.ecommerecapp.presentation.screens.home.HomeScreen
 import com.example.ecommerecapp.presentation.screens.login.LoginScreen
 import com.example.ecommerecapp.presentation.screens.user.GetUserScreen
 
@@ -19,6 +20,10 @@ fun AppNavController() {
 
         composable(route = Screen.UserListScreen.route) {
             GetUserScreen(navController = navController)
+        }
+
+        composable(route = Screen.HomeScreen.route) {
+            HomeScreen(navController = navController)
         }
     }
 }

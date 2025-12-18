@@ -53,7 +53,8 @@ retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = 
 serialization-converter = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "serialization-converter-version" }
 kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "ktx-serialization-version" }
 #Coil
-coil = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil-version" }
+coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil-version" }
+coil-network = {group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil-version"}
 #Lifecycle-compose
 lifecycle-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle-version" }
 #Icons
@@ -72,4 +73,5 @@ hilt-plugin = { id = "com.google.dagger.hilt.android", version.ref = "hilt-versi
 
 [bundles]
 retrofit = ["retrofit","serialization-converter"]
+coil = ["coil-compose","coil-network"]
 

@@ -2,7 +2,6 @@ package com.example.ecommerecapp.data.repositoryimpl
 
 import com.example.ecommerecapp.data.remote.IApi
 import com.example.ecommerecapp.domain.model.User
-import com.example.ecommerecapp.domain.model.Users
 import com.example.ecommerecapp.domain.repositories.IGetUsersRepo
 import retrofit2.Response
 import javax.inject.Inject

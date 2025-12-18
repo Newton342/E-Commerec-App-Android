@@ -8,10 +8,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.ecommerecapp.presentation.screens.home.components.HomeContent
 
 @Composable
-fun HomeScreen(homeVm: HomeVm = hiltViewModel()) {
+fun HomeScreen(homeVm: HomeVm = hiltViewModel(),navController: NavController) {
     val state by homeVm.state.collectAsState()
     val snackBarHostState = remember { SnackbarHostState() }
     LaunchedEffect(Unit) {
@@ -31,5 +33,6 @@ fun HomeScreen(homeVm: HomeVm = hiltViewModel()) {
 @Preview
 @Composable
 private fun HomePreview() {
-    HomeScreen()
+    val navController = rememberNavController()
+    HomeScreen(navController = navController)
 }

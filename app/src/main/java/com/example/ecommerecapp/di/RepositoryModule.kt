@@ -2,8 +2,10 @@ package com.example.ecommerecapp.di
 
 import com.example.ecommerecapp.data.remote.IApi
 import com.example.ecommerecapp.data.repositoryimpl.GetUsersRepoImpl
+import com.example.ecommerecapp.data.repositoryimpl.ProductsRepoImpl
 import com.example.ecommerecapp.data.repositoryimpl.UserLoginRepoImpl
 import com.example.ecommerecapp.domain.repositories.IGetUsersRepo
+import com.example.ecommerecapp.domain.repositories.IProductRepo
 import com.example.ecommerecapp.domain.repositories.IUserLoginRepo
 import dagger.Module
 import dagger.Provides
@@ -22,4 +24,8 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun getLoginUserRepo(iApi: IApi): IUserLoginRepo = UserLoginRepoImpl(iApi)
+
+    @Singleton
+    @Provides
+    fun getProductRepo(iApi: IApi): IProductRepo = ProductsRepoImpl(iApi)
 }

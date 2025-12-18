@@ -24,11 +24,15 @@ import com.example.ecommerecapp.presentation.screens.home.HomeUiState
 
 @Composable
 fun HomeContent(
-    modifier: Modifier = Modifier,snackBarHostState: SnackbarHostState, homeState: HomeUiState, onEvent: (HomeUiEvent) -> Unit
+    modifier: Modifier = Modifier,
+    snackBarHostState: SnackbarHostState,
+    homeState: HomeUiState,
+    onEvent: (HomeUiEvent) -> Unit
 ) {
-    Scaffold(modifier.fillMaxSize(),
+    Scaffold(
+        modifier.fillMaxSize(),
         snackbarHost = { SnackbarHost(hostState = snackBarHostState) }
-        ) { paddingValues ->
+    ) { paddingValues ->
         Column(
             modifier
                 .padding(paddingValues)
@@ -41,7 +45,7 @@ fun HomeContent(
                 OutlinedTxtField(
                     modifier = Modifier.weight(1f), state = TextFieldState(), label = "Search"
                 )
-                PopupMenuButton(onClick = {
+                PopupMenuButton(isExpanded = homeState.isDropdownOpened,onClick = {
                     onEvent(HomeUiEvent.ToggleDropDown(true))
                 }, onDismiss = {
                     onEvent(HomeUiEvent.ToggleDropDown(false))

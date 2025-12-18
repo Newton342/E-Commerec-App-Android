@@ -72,7 +72,7 @@ dependencies {
     //Retrofit
     implementation(libs.bundles.retrofit)
     //Coil
-    implementation(libs.coil)
+    implementation(libs.bundles.coil)
     //Lifecycle compose
     implementation(libs.lifecycle.compose)
     //Compose Icon
