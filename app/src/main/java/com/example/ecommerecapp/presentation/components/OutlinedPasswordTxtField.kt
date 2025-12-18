@@ -33,13 +33,14 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun OutlinedPasswordTxtField(
+    modifier: Modifier = Modifier,
     state: TextFieldState,
     showPassword: Boolean = false,
     hasError: Boolean = false,
     errorText: String? = null,
     onToggleShowPassword: (Boolean) -> Unit
 ) {
-    Column(modifier = Modifier.fillMaxWidth()) {
+    Column(modifier = modifier.fillMaxWidth()) {
         BasicSecureTextField(
             state = state,
             textObfuscationMode = if (showPassword) TextObfuscationMode.Visible else TextObfuscationMode.Hidden,

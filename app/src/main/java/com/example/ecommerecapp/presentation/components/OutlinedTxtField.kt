@@ -31,56 +31,59 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun OutlinedTxtField(
+    modifier: Modifier = Modifier,
     state: TextFieldState,
     hasError: Boolean = false,
     label: String = "Label",
     prefixIcon: ImageVector? = null,
     errorText: String? = null
 ) {
-    Column(modifier = Modifier.fillMaxWidth()) {
-            BasicTextField(
-                modifier = Modifier.fillMaxWidth(),
-                state = state,
-                lineLimits = TextFieldLineLimits.SingleLine,
-                textStyle = TextStyle.Default.copy(
-                    fontSize = 16.sp
-                ),
+    Column(modifier = modifier.fillMaxWidth()) {
+        BasicTextField(
+            modifier = Modifier.fillMaxWidth(),
+            state = state,
+            lineLimits = TextFieldLineLimits.SingleLine,
+            textStyle = TextStyle.Default.copy(
+                fontSize = 16.sp
+            ),
 
-                decorator = { innerTextField ->
-                    Row(
-                        modifier = Modifier
-                            .border(
-                                shape = RoundedCornerShape(10.dp),
-                                width = 1.2.dp,
-                                color = if (hasError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.outline
-                            )
-                            .padding(horizontal = 8.dp, vertical = 12.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        if (prefixIcon != null) {
-                            Icon(
-                                prefixIcon,
-                                contentDescription = null,
-                                tint = Color.Gray,
-                                modifier = Modifier.padding(horizontal = 10.dp)
-                            )
-                        }
-                        Spacer(modifier = Modifier.width(5.dp))
-
-                        Box(
-                            modifier = Modifier.weight(1f)
-                        ) {
-                            if (state.text.isEmpty()) {
-                                Text(
-                                    label,
-                                    color = if (hasError) MaterialTheme.colorScheme.error else Color.Gray.copy(alpha = 0.6f),
-                                    fontSize = 16.sp
-                                )
-                            }
-                            innerTextField()
-                        }
+            decorator = { innerTextField ->
+                Row(
+                    modifier = Modifier
+                        .border(
+                            shape = RoundedCornerShape(10.dp),
+                            width = 1.2.dp,
+                            color = if (hasError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.outline
+                        )
+                        .padding(horizontal = 8.dp, vertical = 12.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    if (prefixIcon != null) {
+                        Icon(
+                            prefixIcon,
+                            contentDescription = null,
+                            tint = Color.Gray,
+                            modifier = Modifier.padding(horizontal = 10.dp)
+                        )
                     }
-                })
+                    Spacer(modifier = Modifier.width(5.dp))
+
+                    Box(
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        if (state.text.isEmpty()) {
+                            Text(
+                                label,
+                                color = if (hasError) MaterialTheme.colorScheme.error else Color.Gray.copy(
+                                    alpha = 0.6f
+                                ),
+                                fontSize = 16.sp
+                            )
+                        }
+                        innerTextField()
+                    }
+                }
+            })
 
 
         if (hasError && errorText != null) {
