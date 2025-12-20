@@ -12,7 +12,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
@@ -35,34 +37,59 @@ class HomeVm @Inject constructor(
     }
 
 
-    fun fetchAllData() {
-        _uiState.update { it.copy(isLoading = true) }
-        allProduct().combine(getCategory()) { products, categories ->
-            _uiState.tryEmit(
-                HomeUiState(
-                    productList = products ?: emptyList(), categoryList = categories ?: emptyList()
-                )
+    fun fetchAllData(sort: String? = null) {
+        val defaultAscSort = if (sort != null && sort == "asc") null else sort
+        allProduct(defaultAscSort).combine(getCategory()) { products, categories ->
+            HomeUiState(
+                productList = products.orEmpty(),
+                visibleProductList = products.orEmpty(),
+                categoryList = listOf("all") + categories.orEmpty()
             )
-        }.catch {
+        }.onStart {
+            _uiState.update { it.copy(isLoading = true) }
+        }.onEach { newState -> _uiState.value = newState }.catch {
+            _uiState.update { it.copy(isLoading = false) }
             _homeEffect.send(HomeEffect.ShowSnackBar("Something went wrong"))
 
+        }.onCompletion {
+            _uiState.update { it.copy(isLoading = false) }
         }.launchIn(viewModelScope)
-        _uiState.update { it.copy(isLoading = false) }
+
     }
 
-    fun fetchSortedProduct(sort: String? = null) {
-        _uiState.update { it.copy(isLoading = true) }
 
-        val defaultAscSort = if (sort != null && sort == "asc") null else sort
-        allProduct(defaultAscSort).catch {
-            _homeEffect.send(HomeEffect.ShowSnackBar("Something went wrong"))
-        }.onEach { productList ->
-            _uiState.tryEmit(
-                HomeUiState(
-                    isLoading = false,
-                    productList = productList ?: emptyList()
-                )
+    fun onSearchQueryChanged(query: String) {
+        _uiState.update { state ->
+            val visibleList = if (query.isBlank()) {
+                state.productList
+            } else {
+                state.productList.filter {
+                    it.title?.contains(query, ignoreCase = true) == true
+                }
+            }
+
+            state.copy(
+                visibleProductList = visibleList
             )
+        }
+    }
+
+    fun fetchProductByCategory(category: String) {
+
+        productByCategory(category).catch {
+            _uiState.update { it.copy(isLoading = false) }
+            _homeEffect.send(HomeEffect.ShowSnackBar("Something went wrong"))
+        }.onStart {
+            _uiState.update { it.copy(isLoading = true) }
+        }.onEach { productList ->
+            _uiState.update {
+                it.copy(
+                    productList = productList.orEmpty(),
+                    visibleProductList = productList.orEmpty()
+                )
+            }
+        }.onCompletion {
+            _uiState.update { it.copy(isLoading = false) }
         }.launchIn(viewModelScope)
     }
 
@@ -73,20 +100,20 @@ class HomeVm @Inject constructor(
             }
 
             is HomeUiEvent.SearchProductByName -> {
-
+                onSearchQueryChanged(events.name)
             }
+
             is HomeUiEvent.SelectedDropdownValue -> {
-                fetchSortedProduct(events.value)
+                fetchAllData(events.value)
             }
 
             is HomeUiEvent.SelectedTabOption -> {
-                _uiState.update { it.copy(isLoading = true) }
-                productByCategory(events.value).catch {
-                    _homeEffect.send(HomeEffect.ShowSnackBar("Something went wrong"))
-                }.onEach { productList ->
-                    _uiState.update { it.copy(productList = productList ?: emptyList()) }
-                }.launchIn(viewModelScope)
-                _uiState.update { it.copy(isLoading = false) }
+                _uiState.update { it.copy(selectedTabValue = events.value) }
+                if (events.value == "all") {
+                    fetchAllData()
+                } else {
+                    fetchProductByCategory(events.value)
+                }
             }
         }
     }
