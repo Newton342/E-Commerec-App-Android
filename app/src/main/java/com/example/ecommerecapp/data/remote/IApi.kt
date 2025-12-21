@@ -6,9 +6,9 @@ import com.example.ecommerecapp.domain.model.TokenModel
 import com.example.ecommerecapp.domain.model.User
 import com.example.ecommerecapp.network.CATEGORIES
 import com.example.ecommerecapp.network.LOGIN
-import com.example.ecommerecapp.network.PRODUCT
 import com.example.ecommerecapp.network.PRODUCTS
 import com.example.ecommerecapp.network.PRODUCTS_BY_CATEGORY
+import com.example.ecommerecapp.network.PRODUCT_BY_ID
 import com.example.ecommerecapp.network.USERS
 import retrofit2.Response
 import retrofit2.http.Body
@@ -27,7 +27,7 @@ interface IApi {
     @GET(PRODUCTS)
     suspend fun getAllProducts(@Query("sort") sort:String? = null): Response<List<ProductModel>>
 
-    @GET(PRODUCT)
+    @GET(PRODUCT_BY_ID)
     suspend fun getProductById(@Path("id") id: Int): Response<ProductModel>
 
     @GET(CATEGORIES)

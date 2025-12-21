@@ -7,14 +7,17 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.ecommerecapp.domain.model.ProductModel
 
 @Composable
-fun HomeBody(modifier: Modifier = Modifier, productList: List<ProductModel> = emptyList()) {
+fun HomeBody(
+    modifier: Modifier = Modifier,
+    productList: List<ProductModel> = emptyList(),
+    onProductClick: (Int) -> Unit
+) {
     LazyVerticalGrid(
         modifier = modifier
             .fillMaxSize()
@@ -24,7 +27,7 @@ fun HomeBody(modifier: Modifier = Modifier, productList: List<ProductModel> = em
         columns = GridCells.Fixed(2)
     ) {
         items(productList) { product ->
-            ProductItem(product = product)
+            ProductItem(product = product, onClick = { onProductClick(product.id ?: 0) })
         }
     }
 }
@@ -32,5 +35,5 @@ fun HomeBody(modifier: Modifier = Modifier, productList: List<ProductModel> = em
 @Preview(showBackground = true)
 @Composable
 private fun HomeBodyPreview() {
-    HomeBody()
+    HomeBody() {}
 }

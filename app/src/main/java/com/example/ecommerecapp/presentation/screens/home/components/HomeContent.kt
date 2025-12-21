@@ -91,7 +91,9 @@ fun HomeContent(
             }else{
                 HomeBody(
                     productList = homeState.visibleProductList
-                )
+                ){
+                    onEvent(HomeUiEvent.OnClickedProduct(it))
+                }
 
             }
 

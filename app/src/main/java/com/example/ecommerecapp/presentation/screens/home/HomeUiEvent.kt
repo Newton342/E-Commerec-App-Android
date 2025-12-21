@@ -5,4 +5,5 @@ sealed interface HomeUiEvent {
     data class SelectedDropdownValue(val value: String): HomeUiEvent
     data class SearchProductByName(val name: String): HomeUiEvent
     data class SelectedTabOption(val value: String): HomeUiEvent
+    data class OnClickedProduct(val index: Int): HomeUiEvent
 }

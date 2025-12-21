@@ -8,7 +8,7 @@ const val LOGIN = "auth/login"
 
 const val PRODUCTS = "products"
 
-const val PRODUCT = "product/{id}"
+const val PRODUCT_BY_ID = "products/{id}"
 
 const val CATEGORIES = "products/categories"
 

@@ -2,6 +2,7 @@ package com.example.ecommerecapp.presentation.screens.home.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,16 +24,18 @@ import com.example.ecommerecapp.domain.model.ProductModel
 import com.example.ecommerecapp.domain.model.Rating
 
 @Composable
-fun ProductItem(modifier: Modifier = Modifier, product: ProductModel) {
+fun ProductItem(modifier: Modifier = Modifier, product: ProductModel,onClick:()-> Unit) {
     Box(
-        modifier.border(
-            shape = RoundedCornerShape(percent = 10),
-            border = BorderStroke(1.dp, color = Color.Gray.copy(0.3f))
-        )
+        modifier
+            .border(
+                shape = RoundedCornerShape(percent = 10),
+                border = BorderStroke(1.dp, color = Color.Gray.copy(0.3f))
+            )
+            .clickable(onClick = onClick)
     ) {
-        Column(modifier = Modifier.padding(8.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-            ) {
+        Column(
+            modifier = Modifier.padding(8.dp), horizontalAlignment = Alignment.CenterHorizontally
+        ) {
 
             AsyncImage(
                 model = product.image,
@@ -41,9 +44,7 @@ fun ProductItem(modifier: Modifier = Modifier, product: ProductModel) {
             )
             Row(modifier = Modifier.fillMaxWidth()) {
                 Text(
-                    product.title ?: "",
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                    product.title ?: "", maxLines = 1, overflow = TextOverflow.Ellipsis
                 )
             }
 
@@ -72,5 +73,5 @@ fun ProductItemPreview() {
             ),
             title = "SanDisk SSD PLUS 1TB Internal SSD - SATA III 6 Gb/s"
         )
-    )
+    ){}
 }
