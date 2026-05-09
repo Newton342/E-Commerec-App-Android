@@ -36,9 +36,3 @@ fun HomeScreen(homeVm: HomeVm = hiltViewModel(), navController: NavController) {
     HomeContent(snackBarHostState = snackBarHostState, homeState = state, onEvent = homeVm::onEvent)
 }
 
-@Preview
-@Composable
-private fun HomePreview() {
-    val navController = rememberNavController()
-    HomeScreen(navController = navController)
-}

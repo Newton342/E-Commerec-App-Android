@@ -1,29 +1,29 @@
 [versions]
-agp = "8.13.2"
-kotlin = "2.0.21"
-coreKtx = "1.17.0"
+agp = "9.2.1"
+kotlin = "2.3.21"
+coreKtx = "1.18.0"
 junit = "4.13.2"
 junitVersion = "1.3.0"
 espressoCore = "3.7.0"
 lifecycleRuntimeKtx = "2.10.0"
-activityCompose = "1.12.1"
-composeBom = "2024.09.00"
+activityCompose = "1.13.0"
+composeBom = "2026.05.00"
 # Dagger-Hilt
-hilt-version = "2.57.2"
+hilt-version = "2.59.2"
 #Hilt navigation
 hilt-nav-version = "1.3.0"
 #Retrofit
 retrofit-version = "3.0.0"
 #Kotlinx serialization
-ktx-serialization-version = "1.9.0"
+ktx-serialization-version = "1.11.0"
 #Coil
-coil-version = "3.3.0"
+coil-version = "3.4.0"
 #KSP
-ksp-devtools-version = "2.2.10-2.0.2"
+ksp-devtools-version = "2.3.2"
 #Lifecycle-compose
 lifecycle-version = "2.10.0"
 #Kotlin serialization plugin
-serialization-plugin-version = "2.2.21"
+serialization-plugin-version = "2.3.21"
 serialization-converter-version = "1.0.0"
 
 [libraries]

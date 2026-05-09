@@ -28,7 +28,7 @@ class UsersVm @Inject constructor(
             users?.let {
                 userData.tryEmit(NetworkUIState.Success(it))
             }
-        }.catch { e -> userData.tryEmit(NetworkUIState.Error("Something went wrong")) }
+        }.catch { _ -> userData.tryEmit(NetworkUIState.Error("Something went wrong")) }
             .launchIn(viewModelScope)
     }
 }

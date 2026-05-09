@@ -1,8 +1,6 @@
 package com.example.ecommerecapp.di
 
 import com.example.ecommerecapp.data.remote.IApi
-import com.example.ecommerecapp.data.repositoryimpl.GetUsersRepoImpl
-import com.example.ecommerecapp.domain.repositories.IGetUsersRepo
 import com.example.ecommerecapp.network.BASEURL
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
