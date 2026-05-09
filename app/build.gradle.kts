@@ -11,7 +11,7 @@ plugins {
 
 android {
     namespace = "com.example.ecommerecapp"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.example.ecommerecapp"
@@ -36,6 +36,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    //noinspection WrongGradleMethod
     kotlin{
         compilerOptions{
             jvmTarget = JvmTarget.JVM_11

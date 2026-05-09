@@ -19,7 +19,7 @@ ktx-serialization-version = "1.11.0"
 #Coil
 coil-version = "3.4.0"
 #KSP
-ksp-devtools-version = "2.3.2"
+ksp-devtools-version = "2.3.7"
 #Lifecycle-compose
 lifecycle-version = "2.10.0"
 #Kotlin serialization plugin
